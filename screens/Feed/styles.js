@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-	feed: {
+	feedContainer: {
 		flex: 1,
-		backgroundColor: 'rgb(25, 25, 25)',
-		alignItems: 'center',
+		backgroundColor: 'rgb(55, 55, 55)',
 		paddingTop: 20,
+		display: 'flex',
+		paddingBottom: 20,
 	},
 });

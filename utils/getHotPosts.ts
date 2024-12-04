@@ -44,7 +44,7 @@ export async function fetchHotPosts(subreddit: string) {
 					'User-Agent': 'nodejs-script',
 				},
 				params: {
-					limit: 100,
+					limit: 25,
 				},
 			},
 		);
@@ -55,9 +55,7 @@ export async function fetchHotPosts(subreddit: string) {
 			console.log('No posts found.');
 		}
 	} catch (error: any) {
-		console.error(
-			'Error fetching hot posts:',
-			error.response?.data || error.message,
-		);
+		console.log('fatty error: ', error);
+		return error;
 	}
 }
