@@ -6,4 +6,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'rgb(25, 25, 25)',
 		justifyContent: 'center',
 	},
+	subInput: {
+		backgroundColor: 'white',
+	},
 });
