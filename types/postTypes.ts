@@ -17,6 +17,8 @@ type PostType = {
 	thumbnail?: string;
 	ups: number;
 	url: string;
+	gallery_data: any;
+	media_metadata: any;
 };
 
 export type IPost = {
