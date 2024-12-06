@@ -32,8 +32,7 @@ export async function fetchHotPosts(subreddit: string) {
 	try {
 		const token = await getAccessToken();
 		if (!token) {
-			console.error('Error: No access token available');
-			return;
+			return console.error('Error: No access token available');
 		}
 
 		const response = await axios.get(
@@ -44,7 +43,7 @@ export async function fetchHotPosts(subreddit: string) {
 					'User-Agent': 'nodejs-script',
 				},
 				params: {
-					limit: 25,
+					limit: 100,
 				},
 			},
 		);
@@ -55,7 +54,9 @@ export async function fetchHotPosts(subreddit: string) {
 			console.log('No posts found.');
 		}
 	} catch (error: any) {
-		console.log('fatty error: ', error);
-		return error;
+		console.error(
+			'Error fetching hot posts:',
+			error.response?.data || error.message,
+		);
 	}
 }

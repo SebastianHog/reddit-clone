@@ -3,10 +3,11 @@ import { View, Text, ScrollView, Image } from 'react-native';
 import { fetchHotPosts } from '../../utils/getHotPosts';
 import React, { useEffect, useState } from 'react';
 import { FeedTextPost } from '../../components/FeedPostTypes/FeedTextPost/FeedTextPost';
-import { WebView } from 'react-native-webview';
+import { IPost } from '../../types/postTypes';
+import { FeedPostSkeleton } from '../../components/FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
 
 export const Feed = () => {
-	const [posts, setPosts] = useState<any[]>([]);
+	const [posts, setPosts] = useState<IPost[]>([]);
 
 	useEffect(() => {
 		const loadPosts = async () => {
@@ -35,7 +36,7 @@ export const Feed = () => {
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>{data.title}</Text>;
 			case data.post_hint === 'self' || data.is_self:
-				return <FeedTextPost post={data} />;
+				return <Text>{data.title}</Text>;
 			default:
 				console.log(data);
 				return <Text>{data.title} DEFAULT</Text>;
@@ -48,7 +49,7 @@ export const Feed = () => {
 				<Text>Loading Posts</Text>
 			) : (
 				posts.map((post: any) => {
-					return <View>{renderSwitch(post.data)}</View>;
+					return <FeedPostSkeleton>{renderSwitch(post.data)}</FeedPostSkeleton>;
 				})
 			)}
 		</ScrollView>
