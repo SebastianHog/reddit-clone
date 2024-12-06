@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-const clientId = 'QFjxSxUD0yEVvFRyyfZWhg';
-const clientSecret = 'GyNhEQFd4ic89zGWxQ-IlQB2Og41NQ';
+const clientId = 'gtDQH2s3w0WFiAvNECq0zw';
 
 async function getAccessToken() {
-	const auth = btoa(`${clientId}:${clientSecret}`);
+	const auth = btoa(`${clientId}:`); // Correct base64 encoding
+	console.log(`Base64 Authorization Header: ${auth}`); // Debugging: Check encoded string
 
 	try {
 		const response = await axios.post(
 			'https://www.reddit.com/api/v1/access_token',
-			'grant_type=client_credentials',
+			'grant_type=https://oauth.reddit.com/grants/installed_client&device_id=DO_NOT_TRACK_THIS_DEVICE',
 			{
 				headers: {
 					Authorization: `Basic ${auth}`,
@@ -18,8 +18,14 @@ async function getAccessToken() {
 			},
 		);
 
+		console.log('Access Token Response:', response.data); // Debugging: Log API response
+		if (!response.data.access_token) {
+			throw new Error('Access token not found in response');
+		}
+
 		return response.data.access_token;
 	} catch (error: any) {
+		// Log error details
 		console.error(
 			'Error fetching access token:',
 			error.response?.data || error.message,

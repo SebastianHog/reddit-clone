@@ -36,7 +36,7 @@ export const Feed = () => {
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>{data.title}</Text>;
 			case data.post_hint === 'self' || data.is_self:
-				return <Text>{data.title}</Text>;
+				return <FeedTextPost post={data} />;
 			default:
 				console.log(data);
 				return <Text>{data.title} DEFAULT</Text>;
@@ -49,7 +49,14 @@ export const Feed = () => {
 				<Text>Loading Posts</Text>
 			) : (
 				posts.map((post: any) => {
-					return <FeedPostSkeleton>{renderSwitch(post.data)}</FeedPostSkeleton>;
+					return (
+						<FeedPostSkeleton
+							post={post.data}
+							key={post.data.id}>
+							{/* <Text>{post.data.selftext}</Text> */}
+							{renderSwitch(post.data)}
+						</FeedPostSkeleton>
+					);
 				})
 			)}
 		</ScrollView>
