@@ -2,8 +2,9 @@ import axios from 'axios';
 import { getAccessToken } from './getAccessToken';
 import { IPost } from '../types/postTypes';
 
-export async function getPostComments({ post }: IPost) {
+export async function getPostComments(post: IPost) {
 	const token = await getAccessToken();
+
 	if (!token) {
 		return console.error('No access token');
 	}
@@ -20,11 +21,9 @@ export async function getPostComments({ post }: IPost) {
 		},
 	);
 
+	console.log(response.data[1].data.children);
 	const comments = response.data[1].data.children;
 
-	comments.forEach((comment: any) => {
-		console.log(comment.data);
-	});
-
+	// console.log('comments: ', comments);
 	return comments.data;
 }
