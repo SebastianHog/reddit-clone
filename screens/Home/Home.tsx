@@ -1,11 +1,19 @@
 import { Text, View, TextInput, Pressable, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const Home = ({ navigation }: any) => {
 	const [subreddit, setSubreddit] = useState<string>('');
 	const [recentSubs, setRecentSubs] = useState<string[]>([]);
+
+	useEffect(() => {
+		const getRecentSubs = async () => {
+			const recentlyViewed = await AsyncStorage.getItem('recentlyViewed');
+			if (recentlyViewed) setRecentSubs(JSON.parse(recentlyViewed));
+		};
+		getRecentSubs();
+	}, []);
 
 	const goToSub = (subreddit: string) => {
 		navigation.navigate('Feed', { subreddit });
@@ -53,6 +61,7 @@ export const Home = ({ navigation }: any) => {
 					{recentSubs.map((subreddit) => {
 						return (
 							<Pressable
+								key={subreddit}
 								style={styles.recentSubLink}
 								onPress={() => goToSub(subreddit)}>
 								<Text style={styles.recentSubName}>{subreddit}</Text>

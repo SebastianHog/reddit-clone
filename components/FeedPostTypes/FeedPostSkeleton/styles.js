@@ -27,4 +27,11 @@ export const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 	},
+	postFooterInfo: {
+		height: 20,
+		width: 100,
+		flexDirection: 'row',
+		gap: 10,
+	},
+	footerInfoContainer: {},
 });

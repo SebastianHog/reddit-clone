@@ -9,12 +9,12 @@ import { FeedGalleryPost } from '../../components/FeedPostTypes/FeedGalleryPost/
 
 export const Feed = ({ route, navigation }: any) => {
 	const [posts, setPosts] = useState<IPost[]>([]);
+	const [error, setError] = useState<boolean>(false);
 
 	useEffect(() => {
 		const loadPosts = async () => {
 			try {
 				const data = await fetchHotPosts(route.params.subreddit.toString());
-				if (data.error) throw new Error(data.error);
 				setPosts(data);
 			} catch (error) {
 				console.error('Error fetching posts:', error);
@@ -30,10 +30,10 @@ export const Feed = ({ route, navigation }: any) => {
 		switch (true) {
 			case data.post_hint === 'image':
 				return <FeedImagePost post={data} />;
-			case data.is_video:
-				return <Text>Video post</Text>;
 			case data.is_gallery:
 				return <FeedGalleryPost post={data} />;
+			case data.is_video:
+				return <Text>Video post</Text>;
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>Crosspost, I guess?</Text>;
 			default:
@@ -51,12 +51,28 @@ export const Feed = ({ route, navigation }: any) => {
 	);
 
 	return (
-		<FlatList
-			style={styles.feedContainer}
-			data={posts}
-			keyExtractor={(item: any) => item.data.id}
-			renderItem={renderItem}
-			ListEmptyComponent={<Text>Loading Posts</Text>}
-		/>
+		<>
+			{posts.length === 0 ? (
+				<Text>Loading</Text>
+			) : (
+				<FlatList
+					style={styles.feedContainer}
+					data={posts}
+					keyExtractor={(item: any) => item.data.id}
+					renderItem={renderItem}
+					ListEmptyComponent={
+						<Text
+							style={{
+								textAlign: 'center',
+								fontSize: 32,
+								color: 'white',
+								fontWeight: 100,
+							}}>
+							Could not find any posts, is the subreddit name correct?
+						</Text>
+					}
+				/>
+			)}
+		</>
 	);
 };

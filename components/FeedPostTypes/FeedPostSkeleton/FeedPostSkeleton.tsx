@@ -4,6 +4,7 @@ import {
 	Text,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
+	Image,
 } from 'react-native';
 import { styles } from './styles';
 import { IPost } from '../../../types/postTypes';
@@ -27,7 +28,14 @@ export const FeedPostSkeleton = ({
 	return (
 		<TouchableWithoutFeedback>
 			<TouchableOpacity
-				style={styles.container}
+				style={[
+					styles.container,
+					post.stickied && {
+						borderColor: 'green',
+						borderWidth: 2,
+						marginBottom: 20,
+					},
+				]}
 				onPress={navigateToPost}
 				activeOpacity={0.7}>
 				<View style={styles.postHeader}>
@@ -37,6 +45,21 @@ export const FeedPostSkeleton = ({
 				</View>
 				<Text style={styles.postTitle}>{post.title}</Text>
 				{children}
+
+				<View style={styles.postFooterInfo}>
+					<View style={styles.footerInfoContainer}>
+						<Text style={{ height: 20, flexDirection: 'column' }}>
+							{post.num_comments}
+							<Text style={{ fontSize: 10, height: 20 }}>comments</Text>
+						</Text>
+					</View>
+					<View style={styles.footerInfoContainer}>
+						<Text style={{ height: 20, flexDirection: 'column' }}>
+							{post.ups}
+							<Text style={{ fontSize: 10, height: 20 }}>pts</Text>
+						</Text>
+					</View>
+				</View>
 			</TouchableOpacity>
 		</TouchableWithoutFeedback>
 	);
