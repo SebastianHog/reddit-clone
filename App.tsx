@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Home } from './screens/Home/Home';
 import { Header } from './components/Header/Header';
 import { Feed } from './screens/Feed/Feed';
+import { Post } from './screens/Post/Post';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,9 +28,18 @@ export default function App() {
 				<Stack.Screen
 					name="Feed"
 					component={Feed}
-					options={{
-						title: 'Feed',
-					}}
+					options={({ route }) => ({
+						title: route.params.subreddit
+							? route.params.subreddit.toString()
+							: 'Subreddit Feed',
+					})}
+				/>
+				<Stack.Screen
+					name="Post"
+					component={Post}
+					options={({ route }) => ({
+						title: route.params.post.title ? route.params.post.title : 'Post',
+					})}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

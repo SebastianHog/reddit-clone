@@ -1,14 +1,13 @@
-import { styles } from './styles';
-import { View, Text, ScrollView, Image, FlatList } from 'react-native';
-import { fetchHotPosts } from '../../utils/getHotPosts';
 import React, { useEffect, useState } from 'react';
-import { FeedTextPost } from '../../components/FeedPostTypes/FeedTextPost/FeedTextPost';
-import { IPost } from '../../types/postTypes';
+import { FlatList, Text } from 'react-native';
+import { styles } from './styles';
+import { fetchHotPosts } from '../../utils/getHotPosts';
 import { FeedPostSkeleton } from '../../components/FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
+import { IPost } from '../../types/postTypes';
 import { FeedImagePost } from '../../components/FeedPostTypes/FeedImagePost/FeedImagePost';
 import { FeedGalleryPost } from '../../components/FeedPostTypes/FeedGalleryPost/FeedGalleryPost';
 
-export const Feed = ({ route }: any) => {
+export const Feed = ({ route, navigation }: any) => {
 	const [posts, setPosts] = useState<IPost[]>([]);
 
 	useEffect(() => {
@@ -33,17 +32,11 @@ export const Feed = ({ route }: any) => {
 				return <FeedImagePost post={data} />;
 			case data.is_video:
 				return <Text>Video post</Text>;
-				break;
 			case data.is_gallery:
 				return <FeedGalleryPost post={data} />;
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>Crosspost, I guess?</Text>;
-				break;
-			case data.post_hint === 'self' || data.is_self:
-				return <FeedTextPost post={data} />;
-				break;
 			default:
-				// console.log('default case: ', data);
 				return;
 		}
 	};
@@ -51,6 +44,7 @@ export const Feed = ({ route }: any) => {
 	const renderItem = ({ item }: { item: any }) => (
 		<FeedPostSkeleton
 			post={item.data}
+			navigation={navigation}
 			key={item.data.id}>
 			{renderSwitch(item.data)}
 		</FeedPostSkeleton>

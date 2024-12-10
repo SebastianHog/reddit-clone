@@ -1,7 +1,7 @@
 {
 	"expo": {
-		"name": "reddit-app",
-		"slug": "reddit-app",
+		"name": "Proredd",
+		"slug": "Proredd",
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/icon.png",
@@ -19,12 +19,17 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
-			}
+			},
+			"package": "com.sebhog.appFinalProj"
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"
 		},
 		"plugins": ["expo-video"],
-		"extra": {}
+		"extra": {
+			"eas": {
+				"projectId": "49f16619-81a2-4caa-8c8e-b2ae3ef60d6b"
+			}
+		}
 	}
 }

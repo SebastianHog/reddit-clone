@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const clientId = 'gtDQH2s3w0WFiAvNECq0zw';
 
@@ -21,7 +21,7 @@ export async function getAccessToken() {
 		}
 
 		return response.data.access_token;
-	} catch (error: any) {
+	} catch (error: AxiosError | any) {
 		console.error(error);
 		throw new Error('Failed to fetch access token');
 	}

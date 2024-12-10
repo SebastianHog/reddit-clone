@@ -29,7 +29,9 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 			</Text>
 			<ScrollView
 				horizontal
-				style={styles.galleryContainer}>
+				style={styles.galleryContainer}
+				scrollEnabled={true}
+				onStartShouldSetResponderCapture={() => true}>
 				{images.map((item: string, index: number) => (
 					<Image
 						key={index}

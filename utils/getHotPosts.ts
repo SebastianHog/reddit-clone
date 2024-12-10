@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { getAccessToken } from './getAccessToken';
 
 export async function fetchHotPosts(subreddit: string) {
@@ -25,7 +25,7 @@ export async function fetchHotPosts(subreddit: string) {
 		} else {
 			console.log('No posts found.');
 		}
-	} catch (error: any) {
+	} catch (error: AxiosError | any) {
 		console.error(
 			'Error fetching hot posts:',
 			error.response?.data || error.message,
