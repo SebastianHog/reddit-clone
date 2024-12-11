@@ -35,7 +35,6 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 					<Text style={styles.galleryArrow}>◀</Text>
 				</Pressable>
 				<Pressable onPress={() => handleGalleryNavigation('right')}>
-					{' '}
 					<Text style={styles.galleryArrow}>▶</Text>
 				</Pressable>
 			</View>

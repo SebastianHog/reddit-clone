@@ -10,6 +10,7 @@ export const FeedImagePost = ({ post }: IPost) => {
 			style={{
 				height: undefined,
 				aspectRatio: 1,
+				objectFit: 'contain',
 			}}
 		/>
 	);

@@ -4,7 +4,6 @@ import {
 	Text,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
-	Image,
 } from 'react-native';
 import { styles } from './styles';
 import { IPost } from '../../../types/postTypes';
@@ -45,7 +44,6 @@ export const FeedPostSkeleton = ({
 				</View>
 				<Text style={styles.postTitle}>{post.title}</Text>
 				{children}
-
 				<View style={styles.postFooterInfo}>
 					<View style={styles.footerInfoContainer}>
 						<Text style={{ height: 20, flexDirection: 'column' }}>
