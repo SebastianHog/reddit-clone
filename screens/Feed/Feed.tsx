@@ -34,23 +34,32 @@ export const Feed = ({ route, navigation }: any) => {
 				return <FeedImagePost post={data} />;
 			case data.is_gallery:
 				return <FeedGalleryPost post={data} />;
-			case data.is_video: {
+			case data.is_video:
 				return <FeedVideoPost post={data} />;
-			}
+			case data.is_self:
+				return <Text numberOfLines={3}>{data.selftext}</Text>;
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>Crosspost, implement!!!</Text>;
 			case data.url.length > 1 && !data.selftext:
 				return (
 					<>
-						<Pressable onPress={() => Linking.openURL(data.url)}>
-							<Text style={{ color: 'lightblue', fontSize: 10 }}>
+						<Pressable
+							onPress={() => Linking.openURL(data.url)}
+							style={{ width: 400 }}>
+							<Text
+								style={{
+									color: 'lightblue',
+									fontSize: 10,
+									width: 400,
+								}}
+								numberOfLines={1}
+								lineBreakMode="tail">
 								{data.url}
 							</Text>
 						</Pressable>
 					</>
 				);
-			case data.is_self:
-				return <Text numberOfLines={3}>{data.selftext}</Text>;
+
 			default:
 				console.log(data.is_self);
 				return <Text>Could not find a post type</Text>;

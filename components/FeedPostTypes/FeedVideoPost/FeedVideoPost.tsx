@@ -2,6 +2,7 @@ import { IPost } from '../../../types/postTypes';
 import { View, Text } from 'react-native';
 import { useEvent } from 'expo';
 import { useVideoPlayer, VideoView } from 'expo-video';
+import { useState } from 'react';
 
 export const FeedVideoPost = ({ post }: IPost) => {
 	const videoUrl =

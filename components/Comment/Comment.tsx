@@ -7,7 +7,14 @@ export const Comment = ({ comment }: IComment) => {
 		<View style={styles.comment}>
 			<View style={styles.commentHeader}>
 				<Text style={styles.commentAuthor}>{comment.author}</Text>
-				<Text style={styles.commentScore}>{comment.score}</Text>
+				<View style={{ flexDirection: 'row' }}>
+					<Text style={styles.commentScore}>
+						{comment.score}
+						<Text style={{ fontSize: 10 }}>pts</Text>
+					</Text>
+					<Text style={{ color: '#ADADAD', marginHorizontal: 5 }}>⸱</Text>
+					<Text style={styles.commentDate}>14m</Text>
+				</View>
 			</View>
 			<Text style={styles.commentText}>{comment.body}</Text>
 		</View>

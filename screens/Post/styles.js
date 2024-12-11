@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
 	post: {
 		padding: 10,
-		borderBottomWidth: 5,
-		borderBottomColor: 'white',
+		borderBottomWidth: 1,
+		borderBottomColor: '#ADADAD',
 	},
 	postTitle: {
 		color: 'white',
@@ -14,9 +14,11 @@ export const styles = StyleSheet.create({
 	},
 	postBody: {
 		color: 'white',
+		fontWeight: 300,
 	},
 	commentSection: {
 		padding: 5,
 		marginTop: 10,
+		paddingBottom: 120,
 	},
 });

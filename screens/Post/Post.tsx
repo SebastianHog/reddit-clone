@@ -35,9 +35,6 @@ export const Post = ({ route }: any) => {
 							key={comment.id}
 							comment={comment}
 						/>
-						<View
-							style={{ width: '100%', height: 2, backgroundColor: 'gray' }}
-						/>
 					</View>
 				))}
 			</View>

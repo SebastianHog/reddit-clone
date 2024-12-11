@@ -5,28 +5,33 @@ const { width, height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
 	comment: {
 		wdith: '100%',
-		backgroundColor: 'black',
-		marginBottom: 10,
+		backgroundColor: '#232323',
+		padding: 5,
+		marginBottom: 1,
 	},
 	commentHeader: {
-		backgroundColor: 'rgb(10,10,10)',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		width: width - 20,
+		paddingRight: 20,
 	},
 	commentText: {
 		color: 'white',
+		fontWeight: '300',
+		marginTop: 5,
 	},
 	commentScore: {
-		color: 'white',
-		width: 50,
-		textAlign: 'center',
+		color: '#ADADAD',
+	},
+	authorScore: {
+		flexDirection: 'row',
+		width: 300,
+		gap: 15,
+	},
+	commentDate: {
+		color: '#ADADAD',
 	},
 	commentAuthor: {
-		color: 'rgb(90,90,250)',
+		color: '#007FFF',
 		fontWeight: 'bold',
-		minWidth: 100,
-		width: 'auto',
-		maxWidth: 170,
 	},
 });
