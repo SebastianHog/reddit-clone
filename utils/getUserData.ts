@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { getAccessToken } from './getAccessToken';
 
-export async function getHotPosts(subreddit: string) {
+export async function getUserData(username: string) {
 	try {
 		const token = await getAccessToken();
 		if (!token) {
@@ -9,13 +9,10 @@ export async function getHotPosts(subreddit: string) {
 		}
 
 		const response = await axios.get(
-			`https://oauth.reddit.com/r/${subreddit}/hot`,
+			`https://oauth.reddit.com/user/${username}/about`,
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,
-				},
-				params: {
-					limit: 100,
 				},
 			},
 		);

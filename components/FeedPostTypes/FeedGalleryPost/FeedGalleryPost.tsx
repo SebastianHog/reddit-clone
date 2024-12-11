@@ -25,7 +25,11 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 
 	const handleGalleryNavigation = (direction: string) => {
 		console.log('Navigating gallery:', direction);
-		scrollViewRef.current.scrollTo({ x: 1000, animated: true });
+		const screenWidth = Dimensions.get('window').width;
+		if (!scrollViewRef.current) return;
+		scrollViewRef.current.scrollTo({
+			x: direction === 'left' ? -screenWidth : +screenWidth,
+		});
 	};
 
 	return (
@@ -51,25 +55,5 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 				))}
 			</ScrollView>
 		</>
-		// <>
-		// 	<Text style={styles.galleryLabel}>Gallery</Text>
-		// 	<ScrollView
-		// 		horizontal
-		// 		style={styles.galleryContainer}
-		// 		scrollEnabled={true}
-		// 		onStartShouldSetResponderCapture={() => true}>
-		// 		{images.map((item: string, index: number) => (
-		// 			<Image
-		// 				key={index}
-		// 				source={{ uri: item }}
-		// 				style={{
-		// 					width: 300,
-		// 					height: undefined,
-		// 					aspectRatio: 1,
-		// 				}}
-		// 			/>
-		// 		))}
-		// 	</ScrollView>
-		// </>
 	);
 };

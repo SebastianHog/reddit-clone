@@ -29,16 +29,14 @@ export default function App() {
 					name="Feed"
 					component={Feed}
 					options={({ route }) => ({
-						title: route.params.subreddit
-							? route.params.subreddit.toString()
-							: 'Subreddit Feed',
+						title: route.params?.subreddit,
 					})}
 				/>
 				<Stack.Screen
 					name="Post"
 					component={Post}
 					options={({ route }) => ({
-						title: route.params.post.title ? route.params.post.title : 'Post',
+						title: route.params?.post.title,
 					})}
 				/>
 			</Stack.Navigator>

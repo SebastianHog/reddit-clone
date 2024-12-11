@@ -1,37 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text, Pressable, Linking } from 'react-native';
 import { styles } from './styles';
-import { fetchHotPosts } from '../../utils/getHotPosts';
+import { getHotPosts } from '../../utils/getHotPosts';
 import { FeedPostSkeleton } from '../../components/FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
 import { IPost } from '../../types/postTypes';
 import { FeedImagePost } from '../../components/FeedPostTypes/FeedImagePost/FeedImagePost';
 import { FeedGalleryPost } from '../../components/FeedPostTypes/FeedGalleryPost/FeedGalleryPost';
-import { Video } from 'expo-av';
+import { FeedVideoPost } from '../../components/FeedPostTypes/FeedVideoPost/FeedVideoPost';
+import { AxiosError } from 'axios';
 
 export const Feed = ({ route, navigation }: any) => {
 	const [posts, setPosts] = useState<IPost[]>([]);
-	const [error, setError] = useState<boolean>(false);
 
 	useEffect(() => {
 		const loadPosts = async () => {
 			try {
-				const data = await fetchHotPosts(route.params.subreddit.toString());
+				const data = await getHotPosts(route.params.subreddit.toString());
 				setPosts(data);
-			} catch (error) {
-				console.error('Error fetching posts:', error);
+			} catch (error: AxiosError | any) {
+				setPosts(error);
+				console.log('MONKEY', posts);
 			}
 		};
 
 		loadPosts();
 	}, []);
-
-	const handlePlaybackStatusUpdate = (status: any) => {
-		if (status.isLoaded && !status.isPlaying) {
-			videoRef.current?.playAsync();
-		}
-	};
-
-	const videoRef = useRef<Video>(null);
 
 	const renderSwitch = (data: IPost['post']) => {
 		if (!data) return <Text>NO DATA</Text>;
@@ -42,28 +35,25 @@ export const Feed = ({ route, navigation }: any) => {
 			case data.is_gallery:
 				return <FeedGalleryPost post={data} />;
 			case data.is_video: {
-				console.log('vid');
-				const videoUrl =
-					data.media?.reddit_video?.fallback_url?.split('?source=fallback')[0];
-				return (
-					<Video
-						ref={videoRef}
-						source={{ uri: videoUrl }}
-						style={{
-							width: '100%',
-							height: 300,
-						}}
-						resizeMode="contain"
-						onPlaybackStatusUpdate={handlePlaybackStatusUpdate}
-						isLooping
-						onError={(error) => console.error('Video Error:', error)}
-					/>
-				);
+				return <FeedVideoPost post={data} />;
 			}
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
-				return <Text>Crosspost, I guess?</Text>;
+				return <Text>Crosspost, implement!!!</Text>;
+			case data.url.length > 1 && !data.selftext:
+				return (
+					<>
+						<Pressable onPress={() => Linking.openURL(data.url)}>
+							<Text style={{ color: 'lightblue', fontSize: 10 }}>
+								{data.url}
+							</Text>
+						</Pressable>
+					</>
+				);
+			case data.is_self:
+				return <Text numberOfLines={3}>{data.selftext}</Text>;
 			default:
-				return null;
+				console.log(data.is_self);
+				return <Text>Could not find a post type</Text>;
 		}
 	};
 

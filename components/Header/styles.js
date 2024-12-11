@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
 	header: {
 		flexDirection: 'row',
 		flex: 1,
-		flexWrap: 'nowrap',
 	},
 	headerContainer: {
 		flex: 1,

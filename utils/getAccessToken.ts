@@ -19,6 +19,7 @@ export async function getAccessToken() {
 		if (!response.data.access_token) {
 			throw new Error('Access token not found in response');
 		}
+		console.log(response.data.access_token);
 
 		return response.data.access_token;
 	} catch (error: AxiosError | any) {

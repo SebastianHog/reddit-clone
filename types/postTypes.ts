@@ -1,7 +1,7 @@
 type PostType = {
 	id: number;
 	title: string;
-	body?: string;
+	body: string;
 	subreddit: string;
 	subreddit_name_prefixed: string;
 	author: string;

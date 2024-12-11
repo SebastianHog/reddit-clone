@@ -47,14 +47,14 @@ export const FeedPostSkeleton = ({
 				<View style={styles.postFooterInfo}>
 					<View style={styles.footerInfoContainer}>
 						<Text style={{ height: 20, flexDirection: 'column' }}>
-							{post.num_comments}
-							<Text style={{ fontSize: 10, height: 20 }}>comments</Text>
+							{post.ups}
+							<Text style={{ fontSize: 10, height: 20 }}>pts</Text>
 						</Text>
 					</View>
 					<View style={styles.footerInfoContainer}>
 						<Text style={{ height: 20, flexDirection: 'column' }}>
-							{post.ups}
-							<Text style={{ fontSize: 10, height: 20 }}>pts</Text>
+							{post.num_comments}
+							<Text style={{ fontSize: 10, height: 20 }}>comments</Text>
 						</Text>
 					</View>
 				</View>

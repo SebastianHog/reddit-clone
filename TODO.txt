@@ -1,0 +1,7 @@
+In no specific order
+
+  1. text formatting support
+  2. post screen UI update
+  3. Make sure images display properly
+  4. make gallery carousel work 
+  5. Users profile page - https://oauth.reddit.com/user/<USERNAME>/about
