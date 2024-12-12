@@ -44,15 +44,15 @@ export default function App() {
 						name="Post"
 						component={Post}
 						options={({ route }) => ({
-							title: 'Post title',
+							title: 'Post',
 						})}
 					/>
 					<Stack.Screen
 						name="Profile"
 						component={Profile}
-						options={{
-							title: 'Profile',
-						}}
+						options={({ route }) => ({
+							title: `/u/${route.params}`,
+						})}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

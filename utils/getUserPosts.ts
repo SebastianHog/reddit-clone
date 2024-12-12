@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { getAccessToken } from './getAccessToken';
 
-export async function getUserData(username: string) {
+export async function getUserPosts(username: string) {
 	try {
 		const token = await getAccessToken();
 		if (!token) {
@@ -9,7 +9,7 @@ export async function getUserData(username: string) {
 		}
 
 		const response = await axios.get(
-			`https://oauth.reddit.com/user/${username}/about`,
+			`https://oauth.reddit.com/user/${username}/submitted`,
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -18,7 +18,7 @@ export async function getUserData(username: string) {
 		);
 
 		if (response.data && response.data.data) {
-			return response.data.data;
+			return response.data.data.children;
 		} else {
 		}
 	} catch (error: AxiosError | any) {

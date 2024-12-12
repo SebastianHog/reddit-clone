@@ -1,11 +1,10 @@
 random order
 
-  1. text formatting support
-  
+  1. Text formatting support
+  2: Comment replies
   3. Make sure images display properly
-  4. make gallery carousel work 
+  4. Make gallery carousel work 
   5. Users profile page - https://oauth.reddit.com/user/<USERNAME>/about
   6. Post tags
-  7. gif support
-  8. Extra empt comment at the bottom?
+  8. Extra empty comment at the bottom?
   9. Loader
