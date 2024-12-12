@@ -24,7 +24,6 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 	});
 
 	const handleGalleryNavigation = (direction: string) => {
-		console.log('Navigating gallery:', direction);
 		const screenWidth = Dimensions.get('window').width;
 		if (!scrollViewRef.current) return;
 		scrollViewRef.current.scrollTo({

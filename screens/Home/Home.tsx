@@ -2,10 +2,14 @@ import { Text, View, TextInput, Pressable, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './styles';
 import { useEffect, useState } from 'react';
+import { navigateTo } from '../../utils/navigateToScreen';
+import { useNavigation } from '@react-navigation/native';
 
-export const Home = ({ navigation }: any) => {
+export const Home = () => {
 	const [subreddit, setSubreddit] = useState<string>('');
 	const [recentSubs, setRecentSubs] = useState<string[]>([]);
+
+	const navigation = useNavigation();
 
 	useEffect(() => {
 		const getRecentSubs = async () => {
@@ -14,10 +18,6 @@ export const Home = ({ navigation }: any) => {
 		};
 		getRecentSubs();
 	}, []);
-
-	const goToSub = (subreddit: string) => {
-		navigation.navigate('Feed', { subreddit });
-	};
 
 	const AddToRecentNavigate = async () => {
 		const recentlyViewed = await AsyncStorage.getItem('recentlyViewed');
@@ -35,7 +35,7 @@ export const Home = ({ navigation }: any) => {
 
 			setRecentSubs(currentRecent);
 
-			goToSub(subreddit);
+			navigateTo('Feed', navigation, subreddit);
 		} catch (error) {
 			console.error('Error handling subreddit visit:', error);
 		}
@@ -63,7 +63,7 @@ export const Home = ({ navigation }: any) => {
 							<Pressable
 								key={subreddit}
 								style={styles.recentSubLink}
-								onPress={() => goToSub(subreddit)}>
+								onPress={() => navigateTo('Feed', navigation, subreddit)}>
 								<Text style={styles.recentSubName}>{subreddit}</Text>
 							</Pressable>
 						);

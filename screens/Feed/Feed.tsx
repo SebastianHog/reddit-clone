@@ -1,25 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FlatList, Text, Pressable, Linking } from 'react-native';
 import { styles } from './styles';
-import { getHotPosts } from '../../utils/getHotPosts';
+import { getHotPosts } from '../../utils/getPostsFromSub';
 import { FeedPostSkeleton } from '../../components/FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
 import { IPost } from '../../types/postTypes';
 import { FeedImagePost } from '../../components/FeedPostTypes/FeedImagePost/FeedImagePost';
 import { FeedGalleryPost } from '../../components/FeedPostTypes/FeedGalleryPost/FeedGalleryPost';
 import { FeedVideoPost } from '../../components/FeedPostTypes/FeedVideoPost/FeedVideoPost';
 import { AxiosError } from 'axios';
+import { Loader } from '../../components/Loader/Loader';
+import { FeedLinkPost } from '../../components/FeedPostTypes/FeedLinkPost/FeedLinkPost';
+import { useNavigation } from '@react-navigation/native';
 
-export const Feed = ({ route, navigation }: any) => {
+export const Feed = ({ route }: any) => {
 	const [posts, setPosts] = useState<IPost[]>([]);
+	const navigation = useNavigation();
 
 	useEffect(() => {
 		const loadPosts = async () => {
 			try {
-				const data = await getHotPosts(route.params.subreddit.toString());
+				const data = await getHotPosts(route.params.data.toString());
 				setPosts(data);
 			} catch (error: AxiosError | any) {
-				setPosts(error);
-				console.log('MONKEY', posts);
+				console.error('Error fetching posts', error);
 			}
 		};
 
@@ -27,7 +30,7 @@ export const Feed = ({ route, navigation }: any) => {
 	}, []);
 
 	const renderSwitch = (data: IPost['post']) => {
-		if (!data) return <Text>NO DATA</Text>;
+		if (!data) return <Text>Could not get post data</Text>;
 
 		switch (true) {
 			case data.post_hint === 'image':
@@ -41,27 +44,9 @@ export const Feed = ({ route, navigation }: any) => {
 			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
 				return <Text>Crosspost, implement!!!</Text>;
 			case data.url.length > 1 && !data.selftext:
-				return (
-					<>
-						<Pressable
-							onPress={() => Linking.openURL(data.url)}
-							style={{ width: 400 }}>
-							<Text
-								style={{
-									color: 'lightblue',
-									fontSize: 10,
-									width: 400,
-								}}
-								numberOfLines={1}
-								lineBreakMode="tail">
-								{data.url}
-							</Text>
-						</Pressable>
-					</>
-				);
+				return <FeedLinkPost post={data} />;
 
 			default:
-				console.log(data.is_self);
 				return <Text>Could not find a post type</Text>;
 		}
 	};
@@ -78,7 +63,7 @@ export const Feed = ({ route, navigation }: any) => {
 	return (
 		<>
 			{posts.length === 0 ? (
-				<Text>Loading</Text>
+				<Loader />
 			) : (
 				<FlatList
 					style={styles.feedContainer}

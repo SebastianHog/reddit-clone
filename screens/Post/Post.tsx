@@ -4,10 +4,11 @@ import { IPost } from '../../types/postTypes';
 import { getPostComments } from '../../utils/getPostComments';
 import { Comment } from '../../components/Comment/Comment';
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 export const Post = ({ route }: any) => {
 	const [comments, setComments] = useState<any[]>([]);
-	const { post }: IPost = route.params;
+	const { post }: IPost = route.params.data;
 
 	useEffect(() => {
 		const fetchComments = async () => {
