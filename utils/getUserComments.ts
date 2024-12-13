@@ -2,7 +2,6 @@ import axios, { AxiosError } from 'axios';
 import { getAccessToken } from './getAccessToken';
 
 export async function getUserComments(username: string) {
-	console.log('Getting user comments');
 	try {
 		const token = await getAccessToken();
 		if (!token) {

@@ -13,14 +13,11 @@ export const UserPosts = (userPosts: { posts: IPost[] }) => {
 	}, []);
 
 	const renderItem = ({ item }: any) => (
-		console.log(item),
-		(
-			<FeedPostSkeleton
-				post={item.data}
-				key={item.data.id}>
-				{renderSwitch(item.data)}
-			</FeedPostSkeleton>
-		)
+		<FeedPostSkeleton
+			post={item.data}
+			key={item.data.id}>
+			{renderSwitch(item.data)}
+		</FeedPostSkeleton>
 	);
 
 	return (

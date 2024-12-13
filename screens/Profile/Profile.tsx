@@ -26,7 +26,6 @@ export const Profile = ({ route }: any) => {
 				setUserData(data);
 				setUserPosts(data2);
 				setUserComments(data3);
-				console.log('Got all data, posts and comments');
 			} catch (error) {
 				console.error('error getting user data: ', error);
 			}
