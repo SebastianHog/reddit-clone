@@ -82,21 +82,6 @@ export const Home = () => {
 				style={styles.clearRecentButton}>
 				<Text style={styles.clearRecentButtonText}>Clear recent</Text>
 			</Pressable>
-			<TouchableOpacity
-				onPress={() =>
-					navigateTo('Profile', navigation, { author: 'Leemsonn' })
-				}>
-				<Text
-					style={{
-						backgroundColor: 'red',
-						height: 50,
-						width: 200,
-						textAlign: 'center',
-						fontSize: 30,
-					}}>
-					Go to profile
-				</Text>
-			</TouchableOpacity>
 		</View>
 	);
 };
