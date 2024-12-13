@@ -26,11 +26,10 @@ export const Feed = ({ route }: any) => {
 		loadPosts();
 	}, []);
 
-	const renderItem = ({ item }: { item: any }) => (
+	const renderItem = ({ item }: any, index: number) => (
 		<FeedPostSkeleton
 			post={item.data}
-			navigation={navigation}
-			key={item.data.id}>
+			key={index}>
 			{renderSwitch(item.data)}
 		</FeedPostSkeleton>
 	);

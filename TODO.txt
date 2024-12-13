@@ -24,4 +24,4 @@ random order
     - Link
     - More, idk what those are though?
   16. Add subs to permanent list accessible from startpage / sidebar
-  
+  17. Make time psoted be real

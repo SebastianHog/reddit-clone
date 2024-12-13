@@ -12,10 +12,10 @@ export const UserPosts = (userPosts: { posts: IPost[] }) => {
 		setPosts(userPosts.posts);
 	}, []);
 
-	const renderItem = ({ item }: any) => (
+	const renderItem = ({ item }: any, index: number) => (
 		<FeedPostSkeleton
 			post={item.data}
-			key={item.data.id}>
+			key={index}>
 			{renderSwitch(item.data)}
 		</FeedPostSkeleton>
 	);
