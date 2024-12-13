@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
 		alignSelf: 'center',
 		marginBottom: 2,
 		padding: 5,
-		paddingBottom: 10,
 	},
 	postHeader: {
 		flexDirection: 'row',

@@ -1,36 +1,50 @@
 import { useEffect, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, FlatList } from 'react-native';
 import { getUserPosts } from '../../utils/getUserPosts';
 import { IPost, PostType } from '../../types/postTypes';
+import { FeedPostSkeleton } from '../FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
+import { useNavigation } from '@react-navigation/native';
+import { renderSwitch } from '../../utils/checkPostType';
+import { styles } from './styles';
 
-export const UserPosts = () => {
-	const user = 'leemsonn';
+export const UserPosts = (userPosts: any) => {
+	// console.log(userPosts.posts.length > 10 && 'posts found');
+	// const user = 'leemsonn';
 	const [posts, setPosts] = useState<IPost[]>([]);
+	const navigation = useNavigation();
 
 	useEffect(() => {
-		const userPosts = async () => {
-			const response: IPost[] = await getUserPosts(user);
-			setPosts(response);
-		};
-		userPosts();
+		setPosts(userPosts.posts);
 	}, []);
 
+	const renderItem = ({ item }: any) => (
+		<FeedPostSkeleton
+			post={item.data}
+			navigation={navigation}
+			key={item.data.id}>
+			{renderSwitch(item.data)}
+		</FeedPostSkeleton>
+	);
+
 	return (
-		<ScrollView style={{}}>
-			{posts.map((post, index) => {
-				return (
-					<View key={index}>
-						<Text
-							style={{
-								paddingVertical: 5,
-								borderBottomColor: 'gray',
-								borderWidth: 1,
-							}}>
-							{post.data.title}
-						</Text>
-					</View>
-				);
-			})}
-		</ScrollView>
+		<View style={{ flex: 1 }}>
+			<FlatList
+				style={styles.feedContainer}
+				data={posts}
+				keyExtractor={(item: any) => item.data.id}
+				renderItem={renderItem}
+				ListEmptyComponent={
+					<Text
+						style={{
+							textAlign: 'center',
+							fontSize: 32,
+							color: 'white',
+							fontWeight: '100',
+						}}>
+						no posts here...
+					</Text>
+				}
+			/>
+		</View>
 	);
 };

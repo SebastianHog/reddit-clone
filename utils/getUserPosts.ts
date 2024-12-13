@@ -14,6 +14,9 @@ export async function getUserPosts(username: string) {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
+				params: {
+					limit: 100,
+				},
 			},
 		);
 

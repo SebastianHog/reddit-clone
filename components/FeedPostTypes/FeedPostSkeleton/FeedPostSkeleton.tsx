@@ -47,15 +47,29 @@ export const FeedPostSkeleton = ({ post, children }: FeedPostSkeletonProps) => {
 				{children}
 				<View style={styles.postFooterInfo}>
 					<View style={styles.footerInfoContainer}>
-						<Text style={{ height: 20, flexDirection: 'column' }}>
+						<Text
+							style={{
+								height: 20,
+								flexDirection: 'column',
+								color: 'lightgray',
+							}}>
 							{post!?.ups}
-							<Text style={{ fontSize: 10, height: 20 }}>pts</Text>
+							<Text style={{ fontSize: 10, height: 20, color: 'lightgray' }}>
+								pts
+							</Text>
 						</Text>
 					</View>
 					<View style={styles.footerInfoContainer}>
-						<Text style={{ height: 20, flexDirection: 'column' }}>
+						<Text
+							style={{
+								height: 20,
+								flexDirection: 'column',
+								color: 'lightgray',
+							}}>
 							{post!?.num_comments}
-							<Text style={{ fontSize: 10, height: 20 }}>comments</Text>
+							<Text style={{ fontSize: 10, height: 20, color: 'lightgray' }}>
+								comments
+							</Text>
 						</Text>
 					</View>
 				</View>

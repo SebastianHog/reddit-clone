@@ -3,32 +3,23 @@ import { View, ScrollView, Text } from 'react-native';
 import { getUserComments } from '../../utils/getUserComments';
 import { IPost, PostType } from '../../types/postTypes';
 import { IComment } from '../../types/commentTypes';
+import { Comment } from '../Comment/Comment';
 
-export const UserComments = () => {
-	const user = 'leemsonn';
+export const UserComments = (userComments: any) => {
 	const [comments, setComments] = useState<IComment[]>([]);
 
 	useEffect(() => {
-		const userPosts = async () => {
-			const response: any[] = await getUserComments(user);
-			setComments(response);
-		};
-		userPosts();
+		setComments(userComments.comments);
 	}, []);
 
 	return (
 		<ScrollView style={{}}>
-			{comments.map((comment, index) => {
+			{comments.map((comment: any, index) => {
 				return (
-					<View
+					<Comment
+						comment={comment.data}
 						key={index}
-						style={{
-							paddingVertical: 5,
-							borderBottomColor: 'gray',
-							borderWidth: 1,
-						}}>
-						<Text>{comment.data.body}</Text>
-					</View>
+					/>
 				);
 			})}
 		</ScrollView>

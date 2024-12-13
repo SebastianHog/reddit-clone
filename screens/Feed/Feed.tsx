@@ -11,6 +11,7 @@ import { AxiosError } from 'axios';
 import { Loader } from '../../components/Loader/Loader';
 import { FeedLinkPost } from '../../components/FeedPostTypes/FeedLinkPost/FeedLinkPost';
 import { useNavigation } from '@react-navigation/native';
+import { renderSwitch } from '../../utils/checkPostType';
 
 export const Feed = ({ route }: any) => {
 	const [posts, setPosts] = useState<IPost[]>([]);
@@ -28,28 +29,6 @@ export const Feed = ({ route }: any) => {
 
 		loadPosts();
 	}, []);
-
-	const renderSwitch = (data: IPost['post']) => {
-		if (!data) return <Text>Could not get post data</Text>;
-
-		switch (true) {
-			case data.post_hint === 'image':
-				return <FeedImagePost post={data} />;
-			case data.is_gallery:
-				return <FeedGalleryPost post={data} />;
-			case data.is_video:
-				return <FeedVideoPost post={data} />;
-			case data.is_self:
-				return <Text numberOfLines={3}>{data.selftext}</Text>;
-			case data.crosspost_parent_list && data.crosspost_parent_list.length > 0:
-				return <Text>Crosspost, implement!!!</Text>;
-			case data.url.length > 1 && !data.selftext:
-				return <FeedLinkPost post={data} />;
-
-			default:
-				return <Text>Could not find a post type</Text>;
-		}
-	};
 
 	const renderItem = ({ item }: { item: any }) => (
 		<FeedPostSkeleton

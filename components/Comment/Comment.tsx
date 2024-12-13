@@ -16,7 +16,6 @@ export const Comment = ({ comment }: IComment) => {
 					}>
 					<Text style={styles.commentAuthor}>{comment.author}</Text>
 				</TouchableOpacity>
-				{/* <Text style={styles.commentAuthor}>{comment.author}</Text> */}
 				<View style={{ flexDirection: 'row' }}>
 					<Text style={styles.commentScore}>
 						{comment.score}
