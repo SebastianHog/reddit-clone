@@ -14,3 +14,14 @@ random order
     - Links to gifs should show in the comment itself
   13. Remove all unused and useless imports
   14. Consistent color scheme across screens.
+  15. Fix all post types
+    - Text
+    - Image
+    - gifs
+    - gallery
+    - video
+    - Text
+    - Link
+    - More, idk what those are though?
+  16. Add subs to permanent list accessible from startpage / sidebar
+  
