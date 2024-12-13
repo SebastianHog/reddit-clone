@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import { getUserComments } from '../../utils/getUserComments';
-import { IPost, PostType } from '../../types/postTypes';
+import { ScrollView } from 'react-native';
 import { IComment } from '../../types/commentTypes';
 import { Comment } from '../Comment/Comment';
 
-export const UserComments = (userComments: any) => {
+export const UserComments = (userComments: { comments: IComment[] }) => {
 	const [comments, setComments] = useState<IComment[]>([]);
 
 	useEffect(() => {

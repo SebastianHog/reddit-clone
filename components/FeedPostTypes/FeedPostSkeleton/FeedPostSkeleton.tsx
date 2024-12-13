@@ -15,7 +15,6 @@ import { useNavigation } from '@react-navigation/native';
 type FeedPostSkeletonProps = {
 	post?: IPost['post'];
 	children?: ReactNode;
-	navigation?: any;
 };
 
 export const FeedPostSkeleton = ({ post, children }: FeedPostSkeletonProps) => {

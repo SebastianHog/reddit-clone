@@ -1,15 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { FlatList, Text, Pressable, Linking } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text } from 'react-native';
 import { styles } from './styles';
 import { getHotPosts } from '../../utils/getPostsFromSub';
 import { FeedPostSkeleton } from '../../components/FeedPostTypes/FeedPostSkeleton/FeedPostSkeleton';
 import { IPost } from '../../types/postTypes';
-import { FeedImagePost } from '../../components/FeedPostTypes/FeedImagePost/FeedImagePost';
-import { FeedGalleryPost } from '../../components/FeedPostTypes/FeedGalleryPost/FeedGalleryPost';
-import { FeedVideoPost } from '../../components/FeedPostTypes/FeedVideoPost/FeedVideoPost';
 import { AxiosError } from 'axios';
 import { Loader } from '../../components/Loader/Loader';
-import { FeedLinkPost } from '../../components/FeedPostTypes/FeedLinkPost/FeedLinkPost';
 import { useNavigation } from '@react-navigation/native';
 import { renderSwitch } from '../../utils/checkPostType';
 

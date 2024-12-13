@@ -3,12 +3,12 @@ import { Dimensions, View } from 'react-native';
 import { Image, ScrollView, Pressable, Text } from 'react-native';
 import { styles } from './styles';
 import { useRef } from 'react';
+import { IImage } from '../../../types/imageTypes';
 
 export const FeedGalleryPost = ({ post }: IPost) => {
-	// console.log(post.gallery_data.items[0].caption);
-	const scrollViewRef = useRef(null);
+	const scrollViewRef = useRef<ScrollView>(null);
 
-	const images = post.gallery_data.items.map((imageData: any) => {
+	const images = post.gallery_data.items.map((imageData: IImage) => {
 		const metadata = post.media_metadata[imageData.media_id];
 		if (metadata && metadata.m.includes('png')) {
 			return {
@@ -32,7 +32,7 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 	};
 
 	return (
-		<>
+		<View>
 			<View style={styles.galleryArrowsContainer}>
 				<Pressable onPress={() => handleGalleryNavigation('left')}>
 					<Text style={styles.galleryArrow}>◀</Text>
@@ -45,14 +45,14 @@ export const FeedGalleryPost = ({ post }: IPost) => {
 				ref={scrollViewRef}
 				style={{ flexDirection: 'row' }}
 				horizontal>
-				{images.map((item: any, index: number) => (
+				{images.map((item: IImage) => (
 					<Image
-						key={index}
+						key={item.media_id || item.id}
 						source={{ uri: item.imageUrl }}
 						style={styles.galleryImage}
 					/>
 				))}
 			</ScrollView>
-		</>
+		</View>
 	);
 };

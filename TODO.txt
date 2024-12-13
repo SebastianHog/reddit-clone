@@ -4,6 +4,13 @@ random order
   2: Comment replies
   3. Typeing on everything
   4. Make gallery carousel work 
+  5. /r/all feed on start page
   6. Post tags
   8. Extra empty comment at the bottom?
   9. Loader
+  10. Show user as OP in comments.
+  11. Tag users
+  12. Links in comment support.
+    - Links to gifs should show in the comment itself
+  13. Remove all unused and useless imports
+  14. Consistent color scheme across screens.

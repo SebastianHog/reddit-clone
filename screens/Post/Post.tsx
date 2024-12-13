@@ -5,9 +5,10 @@ import { getPostComments } from '../../utils/getPostComments';
 import { Comment } from '../../components/Comment/Comment';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
+import { IComment } from '../../types/commentTypes';
 
 export const Post = ({ route }: any) => {
-	const [comments, setComments] = useState<any[]>([]);
+	const [comments, setComments] = useState<any>([]);
 	const { post }: IPost = route.params.data;
 
 	useEffect(() => {
@@ -30,7 +31,7 @@ export const Post = ({ route }: any) => {
 				<Text style={styles.postBody}>{post.selftext}</Text>
 			</View>
 			<View style={styles.commentSection}>
-				{comments.map((comment) => (
+				{comments.map((comment: IComment['comment']) => (
 					<View key={comment.id}>
 						<Comment
 							key={comment.id}
